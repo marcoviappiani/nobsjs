@@ -7,12 +7,25 @@ tabsService.$inject = ['$http'];
 
 function tabsService ($http) {
   var tabs = {
+    createTab: createTab,
     getAllTabs: getAllTabs
   };
 
   return tabs;
 
   //////////
+
+
+  function createTab (tab) {
+    var req = {
+      method: 'POST',
+      url: '/api/core/tabs',
+      data: tab
+    };
+
+    return $http(req)
+      .then(returnData);
+  }
 
   function getAllTabs () {
     var req = {
