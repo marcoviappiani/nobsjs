@@ -10,11 +10,10 @@ angular.module('tropicalbs')
  */
 function AddTabDialogueController ($mdDialog, tabsService) {
   var vm = this;
-  vm.tab = {};
-  vm.hide = hide;
   vm.cancel = cancel;
-  vm.answer = answer;
-  vm.save = save;
+  vm.hide = hide;
+  vm.saveTab = saveTab;
+  vm.tab = {};
 
 
   //////////
@@ -25,15 +24,23 @@ function AddTabDialogueController ($mdDialog, tabsService) {
 
   function cancel () {
     $mdDialog.cancel();
+    console.log('cancelled');
   }
 
-  function answer (answ) {
-    $mdDialog.hide(answ);
+  function displayError() {
+    console.log('there has been an error saving the tab');
   }
 
-  function save () {
+  function saveTab () {
     // TODO tabsService
+    tabsService.createTab(vm.tab)
+      .then(showSuccess)
+      .catch(displayError);
+  }
 
+  function showSuccess () {
+    $mdDialog.hide();
+    console.log('success !!!');
   }
 
 }

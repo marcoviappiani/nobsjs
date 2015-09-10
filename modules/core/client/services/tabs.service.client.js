@@ -41,8 +41,4 @@ function tabsService ($http) {
   function returnData (res) {
     return res.data;
   }
-
-
-
-
 }
